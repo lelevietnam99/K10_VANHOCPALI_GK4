@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Cương Ôn Thi GK IV - Văn Học Pāli</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #050714;
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --card-border: rgba(139, 92, 246, 0.3);
+            --primary-glow: #8b5cf6;
+            --secondary-glow: #06b6d4;
+            --accent-gold: #fbbf24;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --pali-color: #38bdf8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 60px;
+        }
+
+        /* Dynamic Space Background */
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+            overflow: hidden;
+        }
+
+        .nebula {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.35;
+            animation: float 20s infinite alternate ease-in-out;
+        }
+
+        .nebula-1 {
+            width: 500px;
+            height: 500px;
+            background: #7c3aed;
+            top: -10%;
+            left: -10%;
+        }
+
+        .nebula-2 {
+            width: 600px;
+            height: 600px;
+            background: #0284c7;
+            bottom: -20%;
+            right: -10%;
+        }
+
+        .nebula-3 {
+            width: 400px;
+            height: 400px;
+            background: #db2777;
+            top: 40%;
+            left: 30%;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 30px) scale(1.1); }
+        }
+
+        /* Container & Grid */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styling */
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+        }
+
+        header h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a78bfa, #38bdf8, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .sub-header {
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .meta-info {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+        }
+
+        .badge {
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid var(--primary-glow);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            color: #d8b4fe;
+        }
+
+        .badge-gold {
+            background: rgba(251, 191, 36, 0.15);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        /* Quick Navigation */
+        .nav-bar {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 35px;
+            position: sticky;
+            top: 15px;
+            z-index: 100;
+        }
+
+        .nav-btn {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary-glow);
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 15px var(--primary-glow);
+            transform: translateY(-2px);
+        }
+
+        /* Question Cards */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: rgba(56, 189, 248, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #38bdf8;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .points-tag {
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            color: #fff;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* Content Styling */
+        h3 {
+            font-size: 1.2rem;
+            color: #a78bfa;
+            margin: 20px 0 10px 0;
+            border-left: 4px solid var(--primary-glow);
+            padding-left: 10px;
+        }
+
+        h4 {
+            font-size: 1.05rem;
+            color: var(--accent-gold);
+            margin: 14px 0 8px 0;
+        }
+
+        p, li {
+            color: var(--text-main);
+            font-size: 0.98rem;
+            margin-bottom: 8px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .pali {
+            color: var(--pali-color);
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        .highlight {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        /* Table Styling */
+        .table-responsive {
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(10, 15, 30, 0.6);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        th, td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            vertical-align: top;
+        }
+
+        th {
+            background: rgba(139, 92, 246, 0.25);
+            color: #e2e8f0;
+            font-weight: 700;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Callout Box */
+        .callout {
+            background: rgba(56, 189, 248, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin: 15px 0;
+        }
+
+        .callout-title {
+            font-weight: 700;
+            color: #38bdf8;
+            margin-bottom: 6px;
+        }
+
+        .conclusion-box {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 20px;
+        }
+
+        .conclusion-box h4 {
+            color: #c084fc;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Space Background Animation -->
+    <div class="stars-container">
+        <div class="nebula nebula-1"></div>
+        <div class="nebula nebula-2"></div>
+        <div class="nebula nebula-3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Đề Cương Ôn Thi GK IV - Văn Học Pāli</h1>
+            <div class="sub-header">Giáo thọ: NS.TS. Thích Nữ Hiếu Liên</div>
+            <div class="meta-info">
+                <span class="badge">Đề thi: 4 câu tự luận</span>
+                <span class="badge badge-gold">Mẹo: Viết thêm tiếng Pāli để đạt điểm cao hơn</span>
+            </div>
+        </header>
+
+        <!-- Quick Navigation -->
+        <nav class="nav-bar">
+            <a href="#cau1" class="nav-btn">Câu 1 (30đ)</a>
+            <a href="#cau2" class="nav-btn">Câu 2 (30đ)</a>
+            <a href="#cau3" class="nav-btn">Câu 3 (20đ)</a>
+            <a href="#cau4" class="nav-btn">Câu 4 (20đ)</a>
+        </nav>
+
+        <!-- CÂU 1 -->
+        <section id="cau1" class="card">
+            <div class="card-header">
+                <div class="card-title">Câu 1: Khái Niệm & Các Tác Phẩm Văn Học Pāli</div>
+                <div class="points-tag">30 Điểm</div>
+            </div>
+
+            <h3>1.1. Khái Niệm Văn Học Pāli</h3>
+            <div class="callout">
+                <div class="callout-title">📌 Cách làm bài:</div>
+                <p>Viết thành đoạn văn hoàn chỉnh (không gạch đầu dòng), lần lượt giải thích: <strong>Văn học là gì?</strong> &rarr; <strong>Pāli là gì?</strong> &rarr; Kết luận <strong>Văn học Pāli là gì?</strong></p>
+            </div>
+
+            <h4>1. Văn học (Literatura)</h4>
+            <p>Về mặt từ nguyên, khái niệm <em>"Văn học"</em> bắt nguồn từ tiếng Latin <strong>"Literatura"</strong>. Trong đó:</p>
+            <ul>
+                <li><span class="highlight">litera:</span> nghĩa là "chữ cái" hay "chữ viết".</li>
+                <li><span class="highlight">tura:</span> là hậu tố của danh từ.</li>
+            </ul>
+            <p>&rArr; Do đó, <em>Literatura</em> dùng để chỉ các văn bản hay tài liệu viết thành chữ.</p>
+            <ul>
+                <li><strong>Nghĩa rộng:</strong> Chỉ chung cho các tác phẩm được viết thành văn.</li>
+                <li><strong>Nghĩa hẹp:</strong> Là dạng văn bản có giá trị nghệ thuật và trí tuệ.</li>
+                <li><strong>Nghĩa hiện đại:</strong> Bao gồm văn bản thành văn và Văn học dân gian (truyền khẩu). Today bao gồm cả Văn học điện tử.</li>
+            </ul>
+
+            <h4>2. Pāli</h4>
+            <ul>
+                <li><strong>Theo Ngài Buddhaghosa</strong> <em>(Luận sư tác giả Thanh Tịnh Đạo - Visuddhimagga)</em>: <span class="pali">Pāli</span> được định nghĩa là <strong>Chánh tạng</strong> - những lời dạy của Đức Phật và chư Thánh Tăng. Dựa vào cụm từ <span class="pali">“Pāliñca Aṭṭhakathañca”</span> (Chánh tạng và Chú giải):
+                    <ul>
+                        <li><span class="pali">Pāliñca:</span> Chánh tạng - lời dạy của Đức Phật và chư Thánh Tăng.</li>
+                        <li><span class="pali">Aṭṭhakathañca:</span> Chú giải - giải thích các bài Kinh cho Tăng Ni, Phật tử chưa hiểu rõ.</li>
+                    </ul>
+                    <p class="highlight">&rArr; Ngày xưa, Pāli chỉ Chánh tạng chứ không phải tên một ngôn ngữ.</p>
+                </li>
+                <li><strong>Theo Ngài Aggavaṃsa Thera</strong> (trong tác phẩm <em>Saddanīti</em>): <span class="pali">"Atthaṃ pāletīti Pāli"</span> – Ngôn ngữ có khả năng giữ gìn trọn vẹn ý nghĩa của từ.</li>
+                <li><strong>Theo B.C. Law</strong> (trong tác phẩm <em>A History of Pāli Literature</em>): Pāli là tên viết tắt của <span class="pali">"Pāli-bhāsā"</span> (<span class="pali">Pāli</span>: tiếng Pāli; <span class="pali">bhāsā</span>: ngôn ngữ).</li>
+            </ul>
+
+            <h4>3. Văn học Pāli (Định nghĩa tổng hợp)</h4>
+            <p><strong>Văn học Pāli</strong> là chỉ chung cho các tác phẩm được viết <strong>thành văn</strong>, tác phẩm <strong>truyền khẩu</strong>, hoặc các văn bản <strong>điện tử</strong> có giá trị, ý nghĩa <strong>nghệ thuật và trí tuệ</strong> được viết bằng tiếng <strong>Pāli</strong>.</p>
+
+            <h3>1.2. Liệt Kê Các Tác Phẩm Văn Học Pāli</h3>
+            <p>Văn học Pāli gồm 2 phần chính: <strong>Chánh tạng và Ngoại tạng</strong>.</p>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>1. Chánh Tạng (Trình tự bắt buộc: Luật &rarr; Kinh &rarr; Luận)</th>
+                            <th>2. Ngoại Tạng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>• Luật Tạng (Vinaya Piṭaka):</strong>
+                                <ul>
+                                    <li>Phân tích giới bổn Tỳ-kheo (<span class="pali">Bhikkhu-vibhaṅga</span>)</li>
+                                    <li>Phân tích giới bổn Tỳ-kheo ni (<span class="pali">Bhikkhunī-vibhaṅga</span>)</li>
+                                    <li>Đại phẩm (<span class="pali">Mahā-vagga</span>)</li>
+                                    <li>Tiểu phẩm (<span class="pali">Cūla-vagga</span>)</li>
+                                    <li>Tập yếu (<span class="pali">Parivāra</span>)</li>
+                                </ul>
+                                <strong>• Kinh Tạng (Sutta Piṭaka):</strong>
+                                <ul>
+                                    <li>Trường Bộ Kinh (<span class="pali">Dīgha Nikāya</span>)</li>
+                                    <li>Trung Bộ Kinh (<span class="pali">Majjhima Nikāya</span>)</li>
+                                    <li>Tương Ưng Bộ Kinh (<span class="pali">Saṃyutta Nikāya</span>)</li>
+                                    <li>Tăng Chi Bộ Kinh (<span class="pali">Aṅguttara Nikāya</span>)</li>
+                                    <li>Tiểu Bộ Kinh (<span class="pali">Khuddaka Nikāya</span>)</li>
+                                </ul>
+                                <strong>• Luận Tạng (Abhidhamma Piṭaka - 7 Bộ):</strong>
+                                <ul>
+                                    <li>Pháp Tụ (<span class="pali">Dhammasaṅgaṇī</span>)</li>
+                                    <li>Phân Tích (<span class="pali">Vibhaṅga</span>)</li>
+                                    <li>Chất Ngữ (<span class="pali">Dhātukathā</span>)</li>
+                                    <li>Nhân Chế Định (<span class="pali">Puggalapaññatti</span>)</li>
+                                    <li>Ngữ Tông (<span class="pali">Kathāvatthu</span>)</li>
+                                    <li>Song Đối (<span class="pali">Yamaka</span>)</li>
+                                    <li>Vị Trí (<span class="pali">Paṭṭhāna</span>)</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>• Tạp Tạng</li>
+                                    <li>• Văn học Chú giải (<span class="pali">Aṭṭhakathā</span>)</li>
+                                    <li>• Phụ chú giải (<span class="pali">Ṭīkā</span>)</li>
+                                    <li>• Văn học sử</li>
+                                    <li>• Sách giản lục</li>
+                                    <li>• Văn học thi ca hậu thời</li>
+                                    <li>• Sách văn phạm Pāli</li>
+                                    <li>• Tác phẩm về Ngữ âm học, Tu từ học và Từ vựng Pāli</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="conclusion-box">
+                <h4> Kết bài tham khảo Câu 1:</h4>
+                <p>Qua bài học "Giới thiệu tổng quan Văn học Pāli", chúng ta thấy rõ vai trò của Pāli như chiếc chìa khóa mở vào kho tàng Tam tạng Thánh điển. Việc tìm hiểu Văn học Pāli không chỉ là học về ngôn ngữ, mà còn là bước đi vào cội nguồn Phật pháp, giúp chúng ta tiếp cận lời dạy Nguyên thủy của Đức Thế Tôn để nuôi dưỡng chánh kiến và chánh tín. Văn học Pāli chính là dòng chảy sống động bảo tồn Chánh pháp nguyên vẹn qua nhiều thế kỷ.</p>
+            </div>
+        </section>
+
+        <!-- CÂU 2 -->
+        <section id="cau2" class="card">
+            <div class="card-header">
+                <div class="card-title">Câu 2: Phân Tích Nội Dung & Giá Trị Luật Tạng</div>
+                <div class="points-tag">30 Điểm</div>
+            </div>
+
+            <p>Dưới góc nhìn văn học, Luật tạng không phải là hệ thống văn bản pháp lý khô cứng mà là một tác phẩm văn học giàu tính nhân văn, phản ánh sinh động đời sống tâm lý và xã hội thời Đức Phật.</p>
+
+            <h3>1. Phân Tích Nội Dung (4 Yếu Tố Trọng Tâm)</h3>
+            <ul>
+                <li><strong>a. Chủ đề & Tư tưởng:</strong>
+                    <ul>
+                        <li><em>Chủ đề:</em> Đời sống tu học và sinh hoạt Tăng đoàn thời Đức Phật nhằm giữ gìn sự thanh tịnh, hòa hợp.</li>
+                        <li><em>Tư tưởng:</em> Không nhằm trừng phạt mà để giáo dục, chuyển hóa và điều phục con người.</li>
+                    </ul>
+                </li>
+                <li><strong>b. Hệ thống Nhân vật:</strong> Đa dạng, sinh động. Nhân vật trung tâm là Đức Phật (Bậc Đạo sư ban hành luật) cùng chư Tăng Ni mang nhiều căn cơ, trình độ khác nhau.</li>
+                <li><strong>c. Tình huống:</strong> Diễn biến theo tiến trình tự nhiên: <em>Sự việc xảy ra &rarr; Ảnh hưởng Tăng đoàn &rarr; Đức Phật ghi nhận &rarr; Đức Phật chế định điều luật.</em></li>
+                <li><strong>d. Hình tượng Nghệ thuật:</strong>
+                    <ul>
+                        <li><em>Đức Phật:</em> Bậc Đạo sư từ bi, kiên nhẫn.</li>
+                        <li><em>Giới luật:</em> Hàng rào bảo hộ che chắn cho hành giả.</li>
+                        <li><em>Tăng đoàn:</em> Cộng đồng sinh hoạt hòa hợp, cùng nâng đỡ nhau tiến bộ.</li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h3>2. Phân Tích Nghệ Thuật (5 Yếu Tố)</h3>
+            <ul>
+                <li><strong>Thể loại:</strong> Trình bày dưới hình thức tự sự (kể chuyện) sinh động.</li>
+                <li><strong>Ngôn ngữ:</strong> Đơn giản, gần gũi với đời sống thường nhật, kết hợp biện pháp tu từ.</li>
+                <li><strong>Kết cấu:</strong> Chặt chẽ, logic, có chủ ý theo tiến trình sự việc.</li>
+                <li><strong>Văn phong:</strong> Đậm tính giáo hóa từ bi, không mang tính trừng phạt nặng nề.</li>
+                <li><strong>Giá trị nghệ thuật:</strong> Giáo hóa con người, giúp các bài học từ 2.600 năm trước vẫn giữ nguyên giá trị ứng dụng cho đời sống tu học hôm nay.</li>
+            </ul>
+
+            <div class="conclusion-box">
+                <h4> Kết luận Câu 2:</h4>
+                <p>Luật tạng sinh ra từ chính thực tế đời sống tu tập. Học Luật không chỉ để thuộc lòng giới điều mà để thấu hiểu tinh thần giới luật, sống có trách nhiệm với bản thân, Tăng đoàn và Chánh pháp. Đối với người cư sĩ tại gia, hành trì 5 giới đạo đức chính là tạo dựng hình ảnh gương sáng giữa đời thường, góp phần giữ gìn sự trường tồn của Chánh pháp.</p>
+            </div>
+        </section>
+
+        <!-- CÂU 3 -->
+        <section id="cau3" class="card">
+            <div class="card-header">
+                <div class="card-title">Câu 3: Giải Thích Tên 5 Bộ Kinh Nikāya</div>
+                <div class="points-tag">20 Điểm</div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Bộ Kinh</th>
+                            <th>Giải Thích Từ Ngữ (Pāli)</th>
+                            <th>Lý Do Gọi Tên</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. Trường Bộ Kinh</strong><br>(34 bài kinh)</td>
+                            <td><span class="pali">Dīgha:</span> dài<br><span class="pali">Nikāya:</span> bộ, tập hợp</td>
+                            <td>Mỗi bài kinh có dung lượng dài hơn 4 bộ còn lại và đề cập trọn vẹn một chủ đề.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Trung Bộ Kinh</strong><br>(152 bài kinh)</td>
+                            <td><span class="pali">Majjhima:</span> trung bình, ở giữa<br><span class="pali">Nikāya:</span> bộ, nhóm</td>
+                            <td>Tập hợp các bài kinh có độ dài trung bình (ngắn hơn Trường Bộ, dài hơn các bộ khác).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Tương Ưng Bộ Kinh</strong><br>(5 Thiên, 56 Tương Ưng, 7.762 bài)</td>
+                            <td><span class="pali">Saṁyutta:</span> kết hợp, liên hệ, tương ưng<br><span class="pali">Nikāya:</span> bộ, nhóm</td>
+                            <td>Các bài kinh được sắp xếp, nhóm lại theo từng đề mục tương ưng (Tương ứng Uẩn, Xứ, Duyên Khởi, Đạo Lộ...).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. Tăng Chi Bộ Kinh</strong><br>(9.557 bài kinh)</td>
+                            <td><span class="pali">Aṅguttara:</span> tăng dần theo chi pháp<br><span class="pali">Nikāya:</span> bộ, nhóm</td>
+                            <td>Trình bày các chi pháp được sắp xếp theo pháp số tăng dần từ 1 đến 11 chi pháp.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5. Tiểu Bộ Kinh</strong><br>(16 tập kinh)</td>
+                            <td><span class="pali">Khuddaka:</span> nhỏ, tiểu, hỗn hợp<br><span class="pali">Nikāya:</span> bộ, nhóm</td>
+                            <td>Tập hợp nhiều đề tài, nhiều thể loại khác nhau (nghĩa rộng) hoặc các bài kinh ngắn (nghĩa đen).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout">
+                <div class="callout-title">💡 Mẹo viết tắt ghi nhớ (D - M - S - A - K):</div>
+                <p><span class="highlight">D</span>īgha &rarr; <span class="highlight">M</span>ajjhima &rarr; <span class="highlight">S</span>aṁyutta &rarr; <span class="highlight">A</span>ṅguttara &rarr; <span class="highlight">K</span>huddaka<br>
+                <em>(Mẹo vui: Đi Mua Sữa Anh Khóc)</em></p>
+            </div>
+        </section>
+
+        <!-- CÂU 4 -->
+        <section id="cau4" class="card">
+            <div class="card-header">
+                <div class="card-title">Câu 4: Giá Trị Kinh Tạng Đối Với Đời Sống Tu Học</div>
+                <div class="points-tag">20 Điểm</div>
+            </div>
+
+            <div class="callout">
+                <div class="callout-title">📌 Hướng dẫn làm bài:</div>
+                <p>Bài luận ngắn (Mở - Thân - Kết bài). Thí sinh <strong>chọn 1 trong 3 chủ đề</strong> dưới đây để làm bài.</p>
+            </div>
+
+            <h3>CHỦ ĐỀ 1: PHÁP CHÁNH TRI KIẾN (SAMMĀDIṬṬHI)</h3>
+            <ul>
+                <li><strong>Mở bài:</strong> Kinh tạng (<span class="pali">Sutta Piṭaka</span>) là kho tàng giáo pháp giải thoát. Trong đó, Chánh tri kiến (<span class="pali">Sammādiṭṭhi</span>) thuộc Bát Chánh Đạo là ngọn hải đăng soi đường, có giá trị ứng dụng thiết thực cho cả Tăng sĩ và cư sĩ.</li>
+                <li><strong>Thân bài:</strong>
+                    <ul>
+                        <li><em>Cơ sở giáo lý:</em> "Thấy đúng" (không tà kiến, thành kiến) và "hiểu đúng" quy luật nhân quả, nghiệp báo.</li>
+                        <li><em>Giá trị với xuất gia:</em> Kim chỉ nam giải thoát, làm chủ Thân - Khẩu - Ý, không màng danh lợi, thanh tịnh hành thiền.</li>
+                        <li><em>Giá trị với tại gia:</em> Nền tảng đạo đức, giữ 5 giới, lánh xa nghiệp ác, bình thản đón nhận nghịch cảnh.</li>
+                    </ul>
+                </li>
+                <li><strong>Kết bài:</strong> Chánh tri kiến hiện thực hóa phương châm <em>"Pháp học đi đôi với Pháp hành"</em>, kiến tạo đời sống an lạc và gìn giữ Chánh pháp trường tồn.</li>
+            </ul>
+
+            <h3>CHỦ ĐỀ 2: PHÁP CHÁNH TƯ DUY (SAMMĀSAṄKAPPA)</h3>
+            <ul>
+                <li><strong>Mở bài:</strong> Chánh tư duy (<span class="pali">Sammāsaṅkappa</span>) – chi phần thứ hai của Bát Chánh Đạo – định hướng tâm trí, chuyển hóa nhận thức thành hành động thiện lành.</li>
+                <li><strong>Thân bài:</strong>
+                    <ul>
+                        <li><em>Cơ sở giáo lý (3 yếu tố):</em>
+                            <ol>
+                                <li>Tư duy ly dục (<span class="pali">Nekkhamma-saṅkappa</span>): Buông xả, không bám víu ngũ dục.</li>
+                                <li>Tư duy vô sân (<span class="pali">Abyāpāda-saṅkappa</span>): Tràn đầy từ tâm (<span class="pali">Mettā</span>), không oán hận.</li>
+                                <li>Tư duy vô hại (<span class="pali">Avihiṃsā-saṅkappa</span>): Gắn liền với bi tâm (<span class="pali">Karuṇā</span>), không làm tổn thương chúng sinh.</li>
+                            </ol>
+                        </li>
+                        <li><em>Giá trị với xuất gia:</em> Nền tảng giữ giới thanh tịnh, an trú thiểu dục tri túc, phát triển Tứ vô lượng tâm.</li>
+                        <li><em>Giá trị với tại gia:</em> Bớt tham lam trong kinh doanh, hóa giải xung đột ngôn từ, xây dựng gia đình an vui.</li>
+                    </ul>
+                </li>
+                <li><strong>Kết bài:</strong> Chánh tư duy là bánh lái điều hướng tâm linh, giúp chuyển hóa tận gốc rễ phiền não giữa đời thường.</li>
+            </ul>
+
+            <h3>CHỦ ĐỀ 3: CHÁNH NIỆM (SAMMĀSATI) / KINHTỨ NIỆM XỨ</h3>
+            <ul>
+                <li><strong>Mở bài:</strong> Bài kinh Tứ Niệm Xứ (<span class="pali">Satipaṭṭhāna Sutta</span>) được Đức Phật tuyên thuyết là "con đường độc nhất" (<span class="pali">ekāyano maggo</span>) dẫn đến thanh tịnh và giải thoát.</li>
+                <li><strong>Thân bài:</strong>
+                    <ul>
+                        <li><em>Cơ sở giáo lý (4 Lĩnh vực quán niệm):</em>
+                            <ol>
+                                <li>Quán Thân (<span class="pali">Kāyānupassanā</span>): Tỉnh giác trong hơi thở, oai nghi đi đứng nằm ngồi.</li>
+                                <li>Quán Thọ (<span class="pali">Vedanānupassanā</span>): Nhận biết rõ các cảm giác khổ, lạc, xả.</li>
+                                <li>Quán Tâm (<span class="pali">Cittānupassanā</span>): Ghi nhận các trạng thái tâm (tham/sân/si...).</li>
+                                <li>Quán Pháp (<span class="pali">Dhammānupassanā</span>): Nhận thức sự sinh diệt của các hiện tượng.</li>
+                            </ol>
+                        </li>
+                        <li><em>Giá trị với xuất gia:</em> Cốt tủy thiền tập, chặt đứt lậu hoặc, thấu đạt Vô thường - Khổ - Vô ngã.</li>
+                        <li><em>Giá trị với tại gia:</em> Liều thuốc giải tỏa áp lực (stress), an trú trong hiện tại, làm chủ cảm xúc trước cám dỗ và nghịch cảnh.</li>
+                    </ul>
+                </li>
+                <li><strong>Kết bài:</strong> Minh chứng cho tinh thần <em>"Pháp Phật là để thực hành"</em>, giúp dập tắt phiền não ngay trong kiếp sống hiện tại.</li>
+            </ul>
+        </section>
+
+        <footer>
+            <p>Đề Cương Ôn Tập Văn Học Pāli • Chúc Bạn Đạt Kết Quả Cao Trong Kỳ Thi!</p>
+        </footer>
+    </div>
+
+</body>
+</html>

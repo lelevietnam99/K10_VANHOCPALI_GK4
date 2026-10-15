@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đề Cương Ôn Thi Giữa Kỳ IV - Văn Học Pāli</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #070913;
+            --card-bg: rgba(18, 24, 43, 0.78);
+            --border-glow: rgba(168, 85, 247, 0.35);
+            --accent-purple: #c084fc;
+            --accent-cyan: #38bdf8;
+            --accent-gold: #fbbf24;
+            --accent-green: #34d399;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        /* Animated Canvas Space Background */
+        #space-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 20%, #171030 0%, #070913 85%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .title-badge {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: rgba(168, 85, 247, 0.15);
+            border: 1px solid rgba(168, 85, 247, 0.4);
+            border-radius: 999px;
+            color: var(--accent-purple);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 30%, #c084fc 70%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.8rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        .notice-banner {
+            margin-top: 1.2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(251, 191, 36, 0.12);
+            border: 1px solid rgba(251, 191, 36, 0.35);
+            color: var(--accent-gold);
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+
+        /* Nav Tabs */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2.5rem;
+            position: sticky;
+            top: 1rem;
+            z-index: 100;
+            background: rgba(7, 9, 19, 0.85);
+            padding: 0.75rem;
+            border-radius: 16px;
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            padding: 0.75rem 1.25rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .tab-btn:hover {
+            background: rgba(168, 85, 247, 0.18);
+            color: #fff;
+            border-color: rgba(168, 85, 247, 0.4);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.45), rgba(56, 189, 248, 0.35));
+            color: #fff;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.35);
+        }
+
+        /* Content Sections */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 1rem;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            background: rgba(168, 85, 247, 0.2);
+            border: 1px solid var(--accent-purple);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-purple);
+            font-weight: 800;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        h2 {
+            font-size: 1.45rem;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        h3 {
+            font-size: 1.18rem;
+            color: var(--accent-cyan);
+            margin: 1.4rem 0 0.8rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        p, li {
+            color: #d1d5db;
+            margin-bottom: 0.6rem;
+            font-size: 0.98rem;
+        }
+
+        ul, ol {
+            padding-left: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Highlight Terms & Badges */
+        .pali-term {
+            color: var(--accent-gold);
+            font-weight: 700;
+            font-style: italic;
+            background: rgba(251, 191, 36, 0.1);
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            border: 1px solid rgba(251, 191, 36, 0.25);
+        }
+
+        .key-concept {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.08);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1rem 1.2rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.2rem 0;
+        }
+
+        .tips-box {
+            background: rgba(52, 211, 153, 0.08);
+            border-left: 4px solid var(--accent-green);
+            padding: 1rem 1.2rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.2rem 0;
+        }
+
+        /* Custom Tables */
+        .pali-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgba(15, 23, 42, 0.6);
+        }
+
+        .pali-table th {
+            background: rgba(168, 85, 247, 0.22);
+            color: #fff;
+            text-align: left;
+            padding: 1rem;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pali-table td {
+            padding: 0.95rem 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            vertical-align: top;
+        }
+
+        .pali-table tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        /* Accordion for Essay Topics */
+        .topic-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            margin-bottom: 1.2rem;
+            overflow: hidden;
+        }
+
+        .topic-header {
+            padding: 1rem 1.25rem;
+            background: rgba(168, 85, 247, 0.12);
+            color: var(--accent-purple);
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .topic-body {
+            padding: 1.25rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .nav-tabs { flex-direction: column; }
+            .pali-table { display: block; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="space-canvas"></canvas>
+
+    <div class="container">
+        <header>
+            <span class="title-badge">🌌 Đề Cương Ôn Tập Giữa Kỳ GK4 K10</span>
+            <h1>MÔN VĂN HỌC PĀLI</h1>
+            <p class="subtitle">Giảng viên phụ trách: TKN. Hiếu Liên • Thời gian làm bài: 90 phút • Thang điểm: 100 điểm</p>
+            <div class="notice-banner">
+                💡 <strong>Mẹo ghi điểm:</strong> Viết mở ngoặc chú thích thuật ngữ tiếng Pāli ngay sau từ Hán-Việt sẽ được ưu tiên cộng điểm!
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('cautatca')">🌐 Tất Cả Câu Hỏi</button>
+            <button class="tab-btn" onclick="switchTab('cau1')">Câu 1: Khái Niệm & Tác Phẩm (30đ)</button>
+            <button class="tab-btn" onclick="switchTab('cau2')">Câu 2: Phân Tích Luật Tạng (30đ)</button>
+            <button class="tab-btn" onclick="switchTab('cau3')">Câu 3: 5 Bộ Kinh Nikāya (20đ)</button>
+            <button class="tab-btn" onclick="switchTab('cau4')">Câu 4: Bài Luận Kinh Tạng (20đ)</button>
+        </div>
+
+        <!-- CÂU 1 -->
+        <div id="cau1" class="tab-content active">
+            <div class="glass-card">
+                <div class="card-header">
+                    <div class="card-icon">1</div>
+                    <div>
+                        <h2>CÂU 1 (30 ĐIỂM): Khái Niệm Văn Học Pāli & Hệ Thống Các Tác Phẩm</h2>
+                        <p class="subtitle">Phân tích 3 thành tố cốt lõi + Liệt kê chi tiết Chánh tạng & Ngoại tạng</p>
+                    </div>
+                </div>
+
+                <h3>I. GIẢI THÍCH KHÁI NIỆM VĂN HỌC PĀLI</h3>
+                <div class="highlight-box">
+                    📌 <strong>Quy tắc làm bài:</strong> Viết thành đoạn văn liên tục phân tích rõ 3 khái niệm (không gạch đầu dòng ngắn ngủn).
+                </div>
+
+                <ul>
+                    <li>
+                        <strong class="key-concept">1. Khái niệm Văn học:</strong> Về mặt từ nguyên, trong ngôn ngữ phương Tây, từ "Văn học" bắt nguồn từ tiếng La-tinh là <span class="pali-term">Litteratura</span> (trong đó <span class="pali-term">litera</span> nghĩa là "chữ cái" hoặc "chữ viết", còn <span class="pali-term">-tura</span> là hậu tố danh từ). Ban đầu dùng chỉ chung các văn bản, tài liệu dưới dạng chữ viết. Về sau được hiểu theo nghĩa hẹp là văn bản mang giá trị nghệ thuật, tư tưởng và trí tuệ. Theo quan niệm hiện đại bao gồm: Văn học thành văn, Văn học dân gian (truyền khẩu) và Văn học điện tử.
+                    </li>
+                    <li>
+                        <strong class="key-concept">2. Khái niệm Pāli:</strong>
+                        <br>• <em>Theo Đại luận sư Buddhaghosa (thế kỷ V):</em> Định nghĩa thuật ngữ Pāḷi dùng để chỉ <strong>Chánh tạng</strong> (lời Đức Phật thuyết giảng), phân biệt với <span class="pali-term">Aṭṭhakathā</span> là các bản Chú giải.
+                        <br>• <em>Theo ngài Aggavaṃsa (tác phẩm Saddanīti - thế kỷ XII):</em> <span class="pali-term">"Atthaṃ pāletīti Pāli"</span> – Pāli là ngôn ngữ có khả năng gìn giữ trọn vẹn ý nghĩa của từ.
+                        <br>• <em>Theo học giả B.C. Law (A History of Pāli Literature):</em> Pāli là từ viết tắt của cụm <span class="pali-term">Pālibhāsā</span> (<span class="pali-term">Pāli</span>: tên ngôn ngữ; <span class="pali-term">bhāsā</span>: tiếng nói/ngôn ngữ).
+                    </li>
+                    <li>
+                        <strong class="key-concept">3. Định nghĩa Văn học Pāli:</strong> Là toàn bộ các tác phẩm được thể hiện dưới hình thức truyền khẩu, thành văn hoặc văn bản điện tử bằng ngôn ngữ Pāli, chứa đựng ý nghĩa sâu sắc và mang giá trị nghệ thuật cũng như trí tuệ.
+                    </li>
+                </ul>
+
+                <h3>II. HỆ THỐNG CÁC TÁC PHẨM TRONG DÒNG VĂN HỌC PĀLI</h3>
+                <p>Kho tàng Văn học Pāli phân thành 2 khối lớn: <strong>Chánh tạng</strong> và <strong>Ngoại tạng</strong>.</p>
+
+                <table class="pali-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%;">1. Khối Chánh tạng (Tipiṭaka - Bắt buộc xếp Luật trước)</th>
+                            <th style="width: 50%;">2. Khối Ngoại tạng (Ngoài Chánh tạng)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>• Luật tạng (<span class="pali-term">Vinaya Piṭaka</span>) - 5 phần/bộ:</strong>
+                                <ul>
+                                    <li>Phân tích giới bổn Tỳ-kheo (<span class="pali-term">Bhikkhu-vibhaṅga</span>) - 227 giới</li>
+                                    <li>Phân tích giới bổn Tỳ-kheo-ni (<span class="pali-term">Bhikkhunī-vibhaṅga</span>) - 311 giới</li>
+                                    <li>Đại phẩm (<span class="pali-term">Mahāvagga</span>) - 10 chương</li>
+                                    <li>Tiểu phẩm (<span class="pali-term">Cullavagga</span>) - 12 chương</li>
+                                    <li>Tập yếu (<span class="pali-term">Parivāra</span>) - 19 chương</li>
+                                </ul>
+
+                                <strong>• Kinh tạng (<span class="pali-term">Sutta Piṭaka</span>) - 5 bộ Nikāya:</strong>
+                                <ul>
+                                    <li>Trường Bộ kinh (<span class="pali-term">Dīgha Nikāya</span>) - 34 bài kinh</li>
+                                    <li>Trung Bộ kinh (<span class="pali-term">Majjhima Nikāya</span>) - 152 bài kinh</li>
+                                    <li>Tương Ưng Bộ kinh (<span class="pali-term">Saṁyutta Nikāya</span>) - 7.762 bài kinh</li>
+                                    <li>Tăng Chi Bộ kinh (<span class="pali-term">Aṅguttara Nikāya</span>) - 9.557 bài kinh</li>
+                                    <li>Tiểu Bộ kinh (<span class="pali-term">Khuddaka Nikāya</span>) - 16 tập kinh</li>
+                                </ul>
+
+                                <strong>• Luận tạng / Vi Diệu Pháp (<span class="pali-term">Abhidhamma Piṭaka</span>) - 7 bộ:</strong>
+                                <ul>
+                                    <li>Bộ Pháp Tụ (<span class="pali-term">Dhammasaṅgaṇī</span>)</li>
+                                    <li>Bộ Phân Tích (<span class="pali-term">Vibhaṅga</span>)</li>
+                                    <li>Bộ Chất Ngữ (<span class="pali-term">Dhātukathā</span>)</li>
+                                    <li>Bộ Nhân Chế Định (<span class="pali-term">Puggalapaññatti</span>)</li>
+                                    <li>Bộ Ngữ Tông (<span class="pali-term">Kathāvatthu</span>)</li>
+                                    <li>Bộ Song Đối (<span class="pali-term">Yamaka</span>)</li>
+                                    <li>Bộ Vị Trí (<span class="pali-term">Paṭṭhāna</span>)</li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul>
+                                    <li>Các tác phẩm Tạp tạng</li>
+                                    <li>Văn học Chú giải (<span class="pali-term">Aṭṭhakathā</span>) & Phụ chú giải (<span class="pali-term">Ṭīkā</span>)</li>
+                                    <li>Các tác phẩm Sử ký Phật giáo (như <span class="pali-term">Dīpavaṁsa</span> - Đảo sử, <span class="pali-term">Mahāvaṁsa</span> - Đại sử)</li>
+                                    <li>Sách giản lục, Văn học thi ca hậu thời</li>
+                                    <li>Sách văn phạm Pāli (như bộ <span class="pali-term">Saddanīti</span> của ngài Aggavaṃsa)</li>
+                                    <li>Các tác phẩm Ngữ âm học, Tu từ học và Từ vựng Pāli</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- CÂU 2 -->
+        <div id="cau2" class="tab-content">
+            <div class="glass-card">
+                <div class="card-header">
+                    <div class="card-icon">2</div>
+                    <div>
+                        <h2>CÂU 2 (30 ĐIỂM): Phân Tích Nội Dung & Nghệ Thuật Của Luật Tạng</h2>
+                        <p class="subtitle">Góc nhìn Văn học Pāli: Luật tạng là tác phẩm giáo dục & nhân văn sinh động</p>
+                    </div>
+                </div>
+
+                <h3>I. PHÂN TÍCH VỀ NỘI DUNG (4 YẾU TỐ TRỌNG TÂM)</h3>
+                <ul>
+                    <li><strong class="key-concept">1. Chủ đề & Tư tưởng:</strong>
+                        <br>• <em>Chủ đề:</em> Phản ánh chân thật đời sống tu học và sinh hoạt tập thể của Tăng đoàn thời sơ khai, bảo đảm sự thanh tịnh và hòa hợp.
+                        <br>• <em>Tư tưởng:</em> Không trừng phạt cá nhân mà nhằm giáo dục, bảo hộ và điều phục con người. Giới luật là ranh giới an toàn.
+                        <br>• <em>Thông điệp:</em> "Giới luật là mạng mạch của Phật pháp, giới luật còn thì Đạo Phật còn".
+                    </li>
+                    <li><strong class="key-concept">2. Hệ thống Nhân vật:</strong>
+                        <br>• <em>Đức Phật:</em> Bậc Đạo sư từ mẫn, kiên nhẫn, thấu hiểu tâm lý từng đệ tử.
+                        <br>• <em>Chư Tỳ-kheo, Tỳ-kheo-ni:</em> Đa dạng căn cơ, tính cách. Không lý tưởng hóa mà hiện lên rất thực với sai sót và tập khí (ví dụ Tỳ-kheo Sudinna hiếu thảo nhưng sập bẫy hoàn cảnh).
+                    </li>
+                    <li><strong class="key-concept">3. Tình huống diễn tiến:</strong> Luôn xuất phát từ câu chuyện thực tế cụ thể theo trình tự: <em>Sự việc xảy ra ➔ Cư sĩ dèm pha / Ảnh hưởng Tăng đoàn ➔ Trình lên Đức Phật ➔ Đức Phật chế định điều học.</em> (Ví dụ: Giới cấm cất giữ/trao đổi vàng bạc - Học giới 18-19 Nissaggiya Pācittiya do Tỳ-kheo Upananda may y đổi lấy khăn quý).</li>
+                    <li><strong class="key-concept">4. Hình tượng Nghệ thuật:</strong> Hình tượng Đức Phật từ mẫn; Hình tượng Giới luật như hàng rào bảo vệ; Hình tượng Tăng đoàn hòa hợp (Lục hòa).</li>
+                </ul>
+
+                <h3>II. PHÂN TÍCH VỀ NGHỆ THUẬT VÀ GIÁ TRỊ (5 YẾU TỐ CỐT LÕI)</h3>
+                <ol>
+                    <li><strong class="key-concept">Thể loại Tự sự (Kể chuyện):</strong> Không mang tính pháp lý khô khan mà bằng nghệ thuật kể chuyện sinh động có bối cảnh, nhân vật, diễn biến.</li>
+                    <li><strong class="key-concept">Ngôn ngữ Tu từ gần gũi:</strong> Sử dụng từ ngữ sinh hoạt hằng ngày, kết hợp ẩn dụ, so sánh trực quan.</li>
+                    <li><strong class="key-concept">Kết cấu Chặt chẽ & Logic:</strong> Sắp xếp tình tiết khoa học, tự nhiên.</li>
+                    <li><strong class="key-concept">Văn phong Từ bi & Cảm hóa:</strong> Toát lên tinh thần bao dung, chuyển hóa.</li>
+                    <li><strong class="key-concept">Giá trị Bền vững Vượt thời gian:</strong> Bài học hơn 2.600 năm trước vẫn còn nguyên giá trị thực tiễn cho đời sống tu học ngày nay.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- CÂU 3 -->
+        <div id="cau3" class="tab-content">
+            <div class="glass-card">
+                <div class="card-header">
+                    <div class="card-icon">3</div>
+                    <div>
+                        <h2>CÂU 3 (20 ĐIỂM): Giải Thích Tên Gọi 5 Bộ Kinh Nikāya</h2>
+                        <p class="subtitle">Giải thích từ nguyên, ý nghĩa quy mô và cốt lõi của 5 bộ Kinh</p>
+                    </div>
+                </div>
+
+                <table class="pali-table">
+                    <thead>
+                        <tr>
+                            <th>Tên Bộ Kinh (Pāli)</th>
+                            <th>Giải thích Từ nguyên</th>
+                            <th>Ý nghĩa & Quy mô Cốt lõi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1. Kinh Trường Bộ</strong><br>(<span class="pali-term">Dīgha Nikāya</span>)</td>
+                            <td><span class="pali-term">Dīgha</span> = dài<br><span class="pali-term">Nikāya</span> = bộ / tập hợp</td>
+                            <td>Tập hợp các bài kinh có nội dung dài, gồm <strong>34 bài kinh</strong>, chia thành 3 phẩm (Giới uẩn, Đại phẩm, Tiểu phẩm). Mỗi bài đề cập trọn vẹn 1 chủ đề.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2. Kinh Trung Bộ</strong><br>(<span class="pali-term">Majjhima Nikāya</span>)</td>
+                            <td><span class="pali-term">Majjhima</span> = trung bình / ở giữa<br><span class="pali-term">Nikāya</span> = bộ</td>
+                            <td>Tập hợp các bài kinh có độ dài vừa phải, gồm <strong>152 bài kinh</strong>, chia thành 3 phần. Đa số chứa đựng tinh hoa của Phật giáo nguyên thủy.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3. Kinh Tương Ưng Bộ</strong><br>(<span class="pali-term">Saṁyutta Nikāya</span>)</td>
+                            <td><span class="pali-term">Saṁyutta</span> = kết hợp / tương ưng<br><span class="pali-term">Nikāya</span> = bộ</td>
+                            <td>Sắp xếp các bài kinh theo nhóm chủ đề tương ưng với nhau. Gồm <strong>5 thiên, 56 tương ưng, 7.762 bài kinh</strong>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4. Kinh Tăng Chi Bộ</strong><br>(<span class="pali-term">Aṅguttara Nikāya</span>)</td>
+                            <td><span class="pali-term">Aṅguttara</span> = chi pháp tăng dần<br><span class="pali-term">Nikāya</span> = bộ</td>
+                            <td>Sắp xếp bài kinh theo chi pháp tăng dần từ 1 chi pháp đến 11 chi pháp. Gồm <strong>11 chương, 9.557 bài kinh</strong>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>5. Kinh Tiểu Bộ</strong><br>(<span class="pali-term">Khuddaka Nikāya</span>)</td>
+                            <td><span class="pali-term">Khuddaka</span> = nhỏ / hỗn hợp<br><span class="pali-term">Nikāya</span> = bộ</td>
+                            <td>Tập hợp nhiều chủ đề & thể loại văn học khác nhau (kệ ngôn, tiền thân, tiểu sử...). Gồm <strong>16 tập kinh</strong> (theo ấn bản tái bản 2021).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- CÂU 4 -->
+        <div id="cau4" class="tab-content">
+            <div class="glass-card">
+                <div class="card-header">
+                    <div class="card-icon">4</div>
+                    <div>
+                        <h2>CÂU 4 (20 ĐIỂM - BÀI LUẬN 350-400 TỪ): Giá Trị Kinh Tạng Đối Với Tu Học</h2>
+                        <p class="subtitle">Phân tích giá trị Kinh tạng đối với đời sống người xuất gia và cư sĩ tại gia (Liên hệ thực tiễn)</p>
+                    </div>
+                </div>
+
+                <div class="tips-box">
+                    📝 <strong>Gợi ý chọn đề tài:</strong> Có thể chọn viết bài luận theo 1 trong các chủ đề dưới đây (Mẫu chuẩn là Pháp Chánh Tri Kiến).
+                </div>
+
+                <div class="topic-card">
+                    <div class="topic-header"> BÀI LUẬN MẪU: PHÁP CHÁNH TRI KIẾN (SAMMĀDIṬṬHI) – KIM CHỈ NAM CHO ĐỜI SỐNG TU HỌC</div>
+                    <div class="topic-body">
+                        <p><strong>I. MỞ BÀI:</strong> Kinh tạng (<span class="pali-term">Sutta Piṭaka</span>) là kho tàng lưu giữ trọn vẹn những lời dạy vô giá của Đức Thế Tôn. Trong đó, Chánh tri kiến (<span class="pali-term">Sammādiṭṭhi</span>) – chi phần đầu tiên của Bát Chánh Đạo trong Kinh Trung Bộ (<span class="pali-term">Majjhima Nikāya</span>) – chính là ngọn hải đăng soi đường, mang giá trị ứng dụng thiết thực cho cả hàng xuất gia lẫn cư sĩ tại gia.</p>
+
+                        <p><strong>II. THÂN BÀI:</strong></p>
+                        <p><em>1. Cơ sở Giáo lý về Chánh tri kiến:</em> Theo Kinh Trung Bộ, Chánh tri kiến là thấy đúng và hiểu đúng. "Thấy đúng" là ghi nhận hiện thực cuộc sống không bị tà kiến che mờ. "Hiểu đúng" là thấu suốt quy luật Nhân quả và Nghiệp báo (<span class="pali-term">Kamma</span>). Như trong Kinh Tiểu Phân Biệt Nghiệp (<span class="pali-term">Cūḷakammavibhaṅga Sutta</span>): Chúng sinh là chủ nhân của nghiệp, là thừa tự của nghiệp.</p>
+                        <p><em>2. Giá trị & Liên hệ Thực tiễn Tu học:</em>
+                        <br>• <u>Đối với Tăng sĩ xuất gia:</u> Chánh tri kiến là kim chỉ nam giải thoát. Làm chủ Thân - Khẩu - Ý, không bị danh lợi hay tham-sân-si lôi kéo, kiên định phạm hạnh và công phu thiền định hướng tới Thánh quả.
+                        <br>• <u>Đối với cư sĩ tại gia:</u> Là nền tảng nếp sống đạo đức. Thấy đúng nhân quả giúp sống có trách nhiệm, giữ 5 giới, lánh ác làm thiện. Khi đối mặt biến động nghịch cảnh, người có Chánh tri kiến đón nhận an nhiên, không oán trời trách người, xây dựng mái ấm an vui.</p>
+
+                        <p><strong>III. KẾT BÀI:</strong> Giá trị Kinh tạng nằm ở khả năng ứng dụng thực tiễn. Thực hành Chánh tri kiến là hiện thân của phương châm "Pháp học đi đôi với Pháp hành", giúp mỗi người tự xây dựng đời sống an lạc, góp phần gìn giữ Chánh pháp trường tồn.</p>
+                    </div>
+                </div>
+
+                <div class="topic-card">
+                    <div class="topic-header"> CHỦ ĐỀ THAY THẾ KHI LÀM BÀI: CHÁNH NIỆM (SATI) / KINH TỨ NIỆM XỨ</div>
+                    <div class="topic-body">
+                        <p>Học viên có thể chọn phân tích Kinh Tứ Niệm Xứ (<span class="pali-term">Satipaṭṭhāna Sutta</span>) với 4 quán niệm: Quán Thân (<span class="pali-term">Kāyānupassanā</span>), Quán Thọ (<span class="pali-term">Vedanānupassanā</span>), Quán Tâm (<span class="pali-term">Cittānupassanā</span>), Quán Pháp (<span class="pali-term">Dhammānupassanā</span>). Nhấn mạnh Chánh niệm là con đường độc nhất giúp giải tỏa căng thẳng cho người tại gia và đoạn trừ phiền não cho người xuất gia.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Ứng dụng Ôn Tập Văn Học Pāli • Giao diện Vũ Trụ • Chúc quý Tăng Ni & Học viên đạt kết quả xuất sắc! 🌟</p>
+        </footer>
+    </div>
+
+    <!-- Script điều khiển Canvas Vũ Trụ & Tabs -->
+    <script>
+        // Tab Switcher Function
+        function switchTab(tabId) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const btns = document.querySelectorAll('.tab-btn');
+
+            btns.forEach(btn => btn.classList.remove('active'));
+
+            if (tabId === 'cautatca') {
+                tabs.forEach(tab => tab.classList.add('active'));
+                event.currentTarget.classList.add('active');
+            } else {
+                tabs.forEach(tab => {
+                    tab.classList.remove('active');
+                    if (tab.id === tabId) {
+                        tab.classList.add('active');
+                    }
+                });
+                event.currentTarget.classList.add('active');
+            }
+        }
+
+        // Cosmic Animated Stars Canvas Script
+        const canvas = document.getElementById('space-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let stars = [];
+        const numStars = 200;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.8 + 0.2;
+                this.alpha = Math.random();
+                this.speed = Math.random() * 0.012 + 0.004;
+                this.color = ['#ffffff', '#c084fc', '#38bdf8', '#fbbf24'][Math.floor(Math.random() * 4)];
+            }
+
+            update() {
+                this.alpha += this.speed;
+                if (this.alpha > 1 || this.alpha < 0) {
+                    this.speed = -this.speed;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.globalAlpha = Math.abs(this.alpha);
+                ctx.shadowBlur = 6;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < numStars; i++) {
+            stars.push(new Star());
+        }
+
+        function animateSpace() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+            requestAnimationFrame(animateSpace);
+        }
+
+        animateSpace();
+    </script>
+</body>
+</html>

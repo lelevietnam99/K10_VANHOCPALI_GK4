@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Mục Trang Ôn Tập</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: radial-gradient(ellipse at bottom, #111736 0%, #04050e 100%);
+            color: #e2e8f0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Nền vũ trụ sao nhấp nháy */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 229, 255, 0.15), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(179, 136, 255, 0.15), transparent 40%),
+                radial-gradient(1px 1px at 50px 80px, #fff, transparent),
+                radial-gradient(1.5px 1.5px at 200px 300px, #00e5ff, transparent),
+                radial-gradient(2px 2px at 450px 150px, #ffd700, transparent),
+                radial-gradient(1px 1px at 600px 400px, #fff, transparent);
+            background-size: 100% 100%, 100% 100%, 400px 400px, 400px 400px, 400px 400px, 400px 400px;
+            opacity: 0.8;
+            animation: spaceStars 60s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes spaceStars {
+            from { transform: translateY(0); }
+            to { transform: translateY(-400px); }
+        }
+
+        .main-card {
+            background: rgba(16, 22, 48, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0, 229, 255, 0.15);
+        }
+
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8em;
+            background: linear-gradient(135deg, #00e5ff, #ffd700, #b388ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #94a3b8;
+            font-size: 0.95em;
+            margin-bottom: 30px;
+        }
+
+        .link-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e2e8f0;
+            text-decoration: none;
+            padding: 16px 24px;
+            border-radius: 16px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(0, 229, 255, 0.15);
+            border-color: #00e5ff;
+            color: #00e5ff;
+            box-shadow: 0 0 20px rgba(0, 229, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .nav-link .arrow {
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover .arrow {
+            transform: translateX(5px);
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 0.8em;
+            color: #64748b;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-card">
+        <h1>🌌 DANH MỤC ÔN TẬP</h1>
+        <p>Chọn trang bạn muốn truy cập:</p>
+
+        <div class="link-container">
+            <a href="index1.html" class="nav-link">
+                <span>📘 Trang Index 1</span>
+                <span class="arrow">➔</span>
+            </a>
+
+            <a href="index2.html" class="nav-link">
+                <span>📙 Trang Index 2</span>
+                <span class="arrow">➔</span>
+            </a>
+
+            <a href="index3.html" class="nav-link">
+                <span>📗 Trang Index 3</span>
+                <span class="arrow">➔</span>
+            </a>
+        </div>
+
+        <div class="footer">
+            Nhấn vào danh mục để mở trang tương ứng
+        </div>
+    </div>
+
+</body>
+</html>
